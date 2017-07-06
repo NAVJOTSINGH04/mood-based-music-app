@@ -70,7 +70,8 @@ var songs = [{
     'artist': 'diljit',
     'album': 'Sardarji 2',
     'duration': '2:56',
-   'fileName': 'song1.mp3'
+   'fileName': 'song1.mp3',
+   'image': 'img1.jpg'
 },
 {
     'name': 'dil di queen',
@@ -93,7 +94,11 @@ var songs = [{
     'duration': '2:29',
     'fileName': 'song4.mp3'
 }]
-
+function changeCurrentSongDetails(songObj) {
+$('.current-song-image').attr('src','img/'+songObj.image)
+$('.current-song-name').text(songObj.name)
+$('.current-song-album').text(songObj.album)
+}
 function addSongNameClickEvent(songName,position) {
  var id = '#song' + position;
  $(id).click(function() {
@@ -106,12 +111,19 @@ function addSongNameClickEvent(songName,position) {
  else {
    audio.src = songName;
    toggleSong();
+   changeCurrentSongDetails(songObj);
     }
   });
 }
 
 
 window.onload = function() {
+  $('#songs').DataTable(
+    {
+        paging: false
+    }
+  );
+
 
 for(var i =0; i < songs.length;i++) {
    var obj = songs[i];
@@ -128,9 +140,4 @@ for(var i =0; i < songs.length;i++) {
    song.find('.song-length').text(obj.duration);
    addSongNameClickEvent(obj.fileName,i+1)
  }
-}
-function changeCurrentSongDetails(songObj) {
-$('.current-song-image').attr('src','img/' + songObj.image)
-$('.current-song-name').text(songObj.name)
-$('.current-song-album').text(songObj.album)
 }
