@@ -1,4 +1,6 @@
-
+//var currentSongNumber = 1;
+//var willLoop = 0;
+//var willShuffle = 0;
 function toggleSong() {
   //function KEY WORD IS USED TO START THE function
 var song = document.querySelector('audio');
@@ -29,7 +31,8 @@ $('.play-icon').on('click', function() {
 
 });
 $('body').on('keypress', function(event) {
-            if (event.keyCode == 32) {
+  var target = event.target;
+            if (event.keyCode == 32 &&target.tagName !='INPUT') {
             toggleSong();
           }
         });
@@ -53,8 +56,8 @@ return ret;
 }
         function updateCurrentTime() {
 var song = document.querySelector('audio');
-// console.log(song.currentTime);
-// console.log(song.duration);
+ console.log(song.currentTime);
+ console.log(song.duration);
 var currentTime = Math.floor(song.currentTime);
 currentTime = fancyTimeFormat(currentTime);
 var duration = Math.floor(song.duration);
@@ -78,28 +81,32 @@ var songs = [{
     'artist': 'ninja',
     'album': 'crazy tabbar',
     'duration': '3:15',
-    'fileName': 'song2.mp3'
+    'fileName': 'song2.mp3',
+    'image': 'img4.jpg'
 },
 {
     'name': 'Hostel',
     'artist': 'Sharry maan',
     'album': 'single track',
     'duration': '2:34',
-    'fileName': 'song3.mp3'
+    'fileName': 'song3.mp3',
+    'image': 'img3.jpg'
 },
 {
     'name': 'oh ho ho',
     'artist': 'sukhbir',
     'album': 'hindi medium',
     'duration': '2:29',
-    'fileName': 'song4.mp3'
+    'fileName': 'song4.mp3',
+    'image': 'img2.jpg'
 }]
 function changeCurrentSongDetails(songObj) {
-$('.current-song-image').attr('src','img/'+songObj.image)
+$('.current-song-image').attr('src',songObj.image)
 $('.current-song-name').text(songObj.name)
 $('.current-song-album').text(songObj.album)
 }
-function addSongNameClickEvent(songName,position) {
+function addSongNameClickEvent(songObj,position) {
+  var songName = songObj.fileName;
  var id = '#song' + position;
  $(id).click(function() {
  var audio = document.querySelector('audio');
@@ -107,6 +114,7 @@ function addSongNameClickEvent(songName,position) {
  if(currentSong.search(songName) != -1)
   {
    toggleSong();
+   changeCurrentSongDetails(songObj);
   }
  else {
    audio.src = songName;
@@ -118,26 +126,32 @@ function addSongNameClickEvent(songName,position) {
 
 
 window.onload = function() {
-  $('#songs').DataTable(
-    {
-        paging: false
-    }
-  );
 
+setInterval(function(){
+
+updateCurrentTime();
+
+},1000);
 
 for(var i =0; i < songs.length;i++) {
    var obj = songs[i];
    var name = '#song' + (i+1);
    var song = $(name);
-   updateCurrentTime();
-   setTimeout(function() {
-     updateCurrentTime();
-   },1000);
+
 
    song.find('.song-name').text(obj.name);
    song.find('.song-artist').text(obj.artist);
    song.find('.song-album').text(obj.album);
    song.find('.song-length').text(obj.duration);
-   addSongNameClickEvent(obj.fileName,i+1)
+   addSongNameClickEvent(obj,i+1)
  }
+
+ $('#songs').DataTable(
+   {
+       paging: false
+   }
+ );
+
+
+
 }
