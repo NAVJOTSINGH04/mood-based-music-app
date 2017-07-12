@@ -211,3 +211,16 @@ table.dataTable tbody tr {
 .fa.disabled {
     color: gray;
 }
+.moody{
+  margin: auto;
+}
+.mood-list{
+  display: inline-block;
+  height: 150px;
+  width: 200RRpx;
+}
+.mood-list-img{
+  height: 100%;
+  weight:100%;
+  background-color: yellow;
+}

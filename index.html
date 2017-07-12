@@ -12,7 +12,7 @@
 
 <body>
     <div class="wrapper">
-        <section class="welcome-screen hidden">
+        <section class="welcome-screen ">
             <h1> Welcome to Songify </h1>
             <h3> Enter name to access your account </h3>
             <div class="input-wrapper">
@@ -20,11 +20,29 @@
                 <button> Go </button>
             </div>
         </section>
-        <div class="main">
+        <section class="mood hidden " id="moody">
+          <div class="mood-list" id="happy">
+            <img class="mood-list-img" img src="happy.jpg"></div>
+
+            <div class="mood-list" id="sad">
+              <img class="mood-list-img" img src="sad.jpg"></div>
+
+              <div class="mood-list" id="romantic">
+                <img class="mood-list-img" img src="romantic.jpg"></div>
+
+                <div class="mood-list" id="party">
+                  <img class="mood-list-img" img src="party.jpg"></div>
+</section>
+
+        <div class="main hidden ">
             <header>
                 <div class="right floated user-name"> </div>
             </header>
             <section class="content">
+              <div>
+              <button class="button-style" id="back">Go Back</button>
+              </div>
+
                 <audio src="song1.mp3"  ></audio>
                 <table id="songs">
       <thead class="list-headers">
@@ -60,7 +78,7 @@
               </tr>
           <!-- </div> -->
       </tbody></table>
-      <div class="current-song-wrapper">
+      <div class="current-song-wrapper" id="now playing">
               <img class="current-song-image">
               <div>
               <p class="current-song-name"></p>
